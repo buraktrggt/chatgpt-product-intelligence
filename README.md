@@ -55,7 +55,7 @@ chatgpt-product-intelligence/
 
 ```bash
 pip install -r requirements.txt
-python src/data/download_dataset.py
+python scripts/dev/download_dataset.py
 python run_pipeline.py
 streamlit run app/app.py
 ```
