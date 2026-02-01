@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# chatgpt-product-intelligence
-=======
 # 🚀 Product Intelligence & Health Monitoring System
 ### Large-Scale User Feedback Analysis (NLP • Time-Aware Analytics)
 
