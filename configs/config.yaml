@@ -1,0 +1,145 @@
+# =========================
+# Global settings
+# =========================
+project:
+  name: "chatgpt-product-intelligence"
+  output_dir: "reports/exports"
+  cache_dir: "data/interim"
+
+# =========================
+# Data settings
+# =========================
+data:
+  raw_path: "data/raw/chatgpt_reviews.csv"
+  sample_size: null
+  sampling_enabled: false
+
+  # Two-track split
+  max_rating_for_negative: 3
+  min_rating_for_positive: 4
+
+  columns:
+    review_id: "reviewId"
+    text: "content"
+    rating: "score"
+    timestamp: "at"
+    version: "appVersion"
+    impact: "thumbsUpCount"
+
+# =========================
+# Preprocessing
+# =========================
+preprocessing:
+  min_text_length: 5
+  use_nltk_stopwords: true
+
+filtering:
+  drop_non_english: true
+  drop_praise_short: true
+  min_words: 4
+
+# =========================
+# Embeddings
+# =========================
+embeddings:
+  model_name: "sentence-transformers/all-MiniLM-L6-v2"
+  batch_size: 64
+  cache: true
+
+# =========================
+# Topic Modeling
+# =========================
+topics:
+  method: "kmeans"
+
+  # AUTO: elbow
+  kmeans_k: "elbow"
+  elbow:
+    k_min: 6
+    k_max: 30
+    step: 2
+    sample_n: 30000
+    seed: 42
+
+  merge:
+    enabled: true
+    threshold: 0.88
+
+  hdbscan:
+    min_cluster_size: 50
+    min_samples: 10
+
+  # Labeling controls (used by label.py)
+  labeling:
+    ngram_range: [1, 3]
+    min_df: 8
+    max_df: 0.80
+    max_features: 40000
+    topk_terms: 30
+
+# =========================
+# Time Windows
+# =========================
+windows:
+  mode: "sliding"
+  sliding:
+    window_days: 30
+    step_days: 7
+
+# =========================
+# Trends (Emerging Issues)
+# =========================
+trends:
+  top_k_emerging: 10
+  min_prev_count: 5
+  min_delta: 1
+
+# =========================
+# Release Impact + Version Impute
+# =========================
+release_impact:
+  min_known_rows_required: 200
+  max_unknown_pct_allowed: 60.0
+  topk: 10
+  exclude_unknown_in_ranking: true
+  include_unknown_row_in_table: true
+  min_reviews_per_version: 100
+
+  version_impute:
+    enabled: true
+    version_col: "version"
+    time_col: "timestamp"
+    unknown_token: "unknown"
+    min_version_samples: 80
+    prior_power: 1.0
+    min_posterior: 0.60
+    hard_window_days: 14
+
+# =========================
+# Scoring Weights
+# =========================
+scoring:
+  weights:
+    negativity: 0.5
+    volume: 0.3
+    growth: 0.15
+    impact: 0.05
+
+# =========================
+# LLM
+# =========================
+llm:
+  enabled: true
+  provider: "openai"
+  model: "gpt-4o-mini"
+  temperature: 0.2
+  max_retries: 3
+  timeout_s: 60
+
+# =========================
+# Reporting
+# =========================
+reporting:
+  format: "markdown"
+  filename: "product_health_report.md"
+  top_n_topics: 15
