@@ -1,7 +1,7 @@
 
 # Product Intelligence & Health Monitoring System
 ### Large-Scale User Feedback Analysis (NLP • Time-Aware Analytics)
-=======
+
 <img src="assets/demo.gif" width="900" alt="Demo preview" />
 
 
