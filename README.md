@@ -1,70 +1,57 @@
+
 # 🚀 Product Intelligence & Health Monitoring System
 ### Large-Scale User Feedback Analysis (NLP • Time-Aware Analytics)
+=======
+<img src="assets/demo.gif" width="900" alt="Demo preview" />
 
----
 
-## 🧭 Project Overview
 
-This project implements a **Product Intelligence system** that analyzes large-scale user feedback to detect product issues, track their evolution over time, and identify regressions.
+\# ChatGPT Product Intelligence
 
-The system focuses on **problem discovery and degradation monitoring** rather than generic sentiment summarization.
+Automated pipeline that turns large-scale app reviews into \*\*prioritized product \& engineering issues\*\*.
 
----
 
-## 🧠 Modeling Approach
 
-### Topic Modeling
+\*\*Delivers\*\*
 
-Topic discovery is performed using **semantic embeddings and clustering**.
-The pipeline supports **local LLM-based or embedding-based representations**, depending on configuration.
+\- Semantic clustering of complaint themes (embeddings + unsupervised learning)
 
-- LLM usage is **local / self-hosted** and optional
-- No dependency on hosted third-party inference services is required
-- All modeling steps are reproducible from raw data
+\- Trend detection with sliding windows (weekly/monthly configurable)
 
----
+\- Release/version impact signals (when metadata exists)
 
-## 🏗️ Architecture
+\- Executive-ready outputs: report + JSON summary
 
-- Data ingestion & validation (`src/data/`)
-- Text preprocessing (`src/preprocessing/`)
-- Sentiment scoring (`src/sentiment/`)
-- Embeddings & topic discovery (`src/embeddings/`, `src/topics/`)
-- Temporal trend analysis (`src/trends/`)
-- Release impact analysis (`src/release_impact/`)
-- Summary & reporting (`src/summary/`, `src/reporting/`)
 
----
 
-## 📁 Repository Structure
-
-```
-chatgpt-product-intelligence/
-├── app/
-├── configs/
-├── data/
-├── reports/
-├── scripts/
-├── src/
-└── run_pipeline.py
-```
-
----
-
-## ▶️ Running
+\*\*Quickstart\*\*
 
 ```bash
+
 pip install -r requirements.txt
 python scripts/dev/download_dataset.py
 python run_pipeline.py
 streamlit run app/app.py
 ```
 
----
 
-## 📌 Notes
+python scripts/dev/download\_dataset.py
 
-- Absolute, user-specific paths are intentionally avoided
-- All file access is project-relative for portability
-- Dataset files are excluded from version control
+python run\_pipeline.py
+
+
+
+Outputs
+
+
+
+reports/exports/product\_health\_report.md
+
+
+
+reports/exports/summary.json
+
+
+
+Dataset is not included in the repo (size/licensing). Download via the script above.
 
